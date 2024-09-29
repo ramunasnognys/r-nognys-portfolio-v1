@@ -1,0 +1,144 @@
+/* Base Styles */
+* {
+  margin: 0; /* Reset margin for all elements */
+  padding: 0; /* Reset padding for all elements */
+}
+
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  line-height: 1.6;
+  padding-top: 2rem; /* Reduced from 2rem to account for main padding */
+  padding-left: 3rem;
+  font-size: 1rem; /* Set base font size */
+  text-transform: lowercase;
+}
+
+/* Set all headings and paragraphs to have the same font size */
+h1, h2, h3, h4, h5, h6, p {
+  font-size: 1rem; /* Set to 1.2rem */
+  font-weight: normal; /* Optional: adjust weight if needed */
+  margin: .5rem; /* Optional: reset margin */
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  outline: none;
+}
+
+/* Container */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0; /* Remove padding from the container */
+}
+
+/* Header Styles */
+h1 {
+  margin-bottom: .3rem;
+  line-height: 0; /* Set line-height to 0 for header element children */
+}
+
+h1,p > * {
+  line-height: 0; /* Apply line-height of 0 to all direct children of h1 */
+  padding: 0;
+}
+
+.location {
+  color: #666; /* Subtle gray to differentiate */
+  margin-bottom: 2rem;
+}
+
+/* Section Styles */
+section {
+  margin-bottom: 2rem; /* Set gap between sections to 2rem */
+  margin-left: 0;
+}
+
+section p {
+  margin-bottom: 0; /* Remove margin below paragraphs to avoid extra spacing */
+  padding: 0;
+
+}
+
+section h2 {
+  margin:0; /* Remove margin below h2 to eliminate gap with p */
+}
+
+section p {
+  margin-top: 0; /* Remove margin above p to eliminate gap with h2 */
+  padding: 0;
+  margin-left: 0;
+}
+
+header {
+  line-height: 0.5rem; /* Set line-height to 0.5rem for children spacing */
+  margin: 0;
+}
+
+header p, h1 {
+  padding: 0;
+  margin-left: 0;
+}
+
+h2 {
+  font-weight: bold;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  line-height: 1.4; /* Increase line height for better readability */
+}
+
+p {
+  margin-bottom: 1rem; /* Add margin to paragraphs */
+  line-height: 1.6; /* Increase line height for better readability */
+}
+
+/* Remove indentation from lists */
+ul, ol {
+  padding: 0; /* Remove padding */
+  margin: 0; /* Remove margin */
+}
+
+/* Link Styles */
+.links ul {
+  list-style: none; /* Remove list style */
+  padding: 0; /* Ensure no padding for links list */
+}
+
+.links li {
+  margin: 0; /* Remove margin */
+  font-size: 1rem; /* Set to 1rem for consistency */
+  list-style: none; /* Ensure no list style */
+}
+
+.links a {
+  color: inherit; /* Remove link color styling */
+  text-decoration: none; /* Remove underline */
+  display: block; /* Keep block display */
+  margin-bottom: 0; /* Remove margin */
+  
+}
+
+/* Work Experience List Item Styles */
+ul li {
+  font-size: 1rem; /* Set to 1.2rem for consistency */
+  color: #333; /* Ensure color consistency */
+  list-style: none;
+}
+
+/* Additional Styling for Minimal Look */
+.profile {
+  border: 1px solid #ddd; /* Light border around the profile for structure */
+  padding: 0; /* Remove padding in the profile */
+  background: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* Subtle shadow for depth */
+}
+
+/* Main Element Spacing */
+main {
+  padding: 0; /* Remove padding from main */
+}
+
