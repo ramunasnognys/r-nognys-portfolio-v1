@@ -12,7 +12,7 @@ const Profile = () => {
         <section className="mb-8">
           <h2 className="font-bold mb-2">today</h2>
           <p>
-          I am working on the Tyra Redevelopment Project in the North Sea off the coast of Denmark as an offshore scaffolder.
+          I am currently working as an offshore scaffolder on the Tyra Redevelopment Project, located in the North Sea off the coast of Denmark.
           </p>
         </section>
 
