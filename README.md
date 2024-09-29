@@ -1,6 +1,10 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+<<<<<<< Updated upstream
 # Ramas Cook's Portfolio v3
+=======
+# Ramas Cook's Portfolio v2
+>>>>>>> Stashed changes
 ## Getting Started
 First, run the development server:
 
