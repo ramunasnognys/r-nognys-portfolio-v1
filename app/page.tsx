@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <main className="relative h-screen w-screen overflow-hidden">
       <ASCIIBackground />
-      <div className="absolute inset-0 z-10">
+      <div className="profile-container absolute inset-0 z-10 ">
         <Profile />
       </div>
     </main>
