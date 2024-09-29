@@ -47,6 +47,9 @@ const config: Config = {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      fontFamily: {
+        mono: ['Geist Mono', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'Liberation Mono', 'Courier New', 'monospace'],
+      },
     },
   },
   plugins: [],
@@ -60,8 +63,8 @@ export default config;
 ```md
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+# Ramas Cook's Portfolio v3
 ## Getting Started
-
 First, run the development server:
 
 \`\`\`bash
@@ -94,6 +97,7 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# my-portfolio
 
 ```
 
@@ -127,7 +131,8 @@ export default config;
   "dependencies": {
     "next": "14.2.13",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "@vercel/font": "^1.0.2"
   },
   "devDependencies": {
     "@types/node": "^20",
@@ -137,7 +142,8 @@ export default config;
     "eslint-config-next": "14.2.13",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
-    "typescript": "^5"
+    "typescript": "^5",
+    "@vercel/font": "^1.0.2"
   }
 }
 
@@ -240,17 +246,37 @@ next-env.d.ts
 
 ```
 
+# lib\utils.ts
+
+```ts
+import { clsx, type ClassValue } from "clsx"
+import { twMerge } from "tailwind-merge"
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs))
+}
+
+```
+
 # app\page.tsx
 
 ```tsx
 import ASCIIBackground from './components/ASCIIBackground'
-// import ToggleButton from './components/ToggleButton'
+import Profile from './components/profile'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Ramunas Nognys - Offshore Scaffolder and Rigger',
+  description: 'Ramunas Nognys - Experienced offshore scaffolder and rigger with a decade of experience in the oil & gas and renewable energy sectors.',
+}
 
 export default function Home() {
   return (
-    <main>
+    <main className="relative h-screen w-screen overflow-hidden">
       <ASCIIBackground />
-      {/* <ToggleButton /> */}
+      <div className="profile-container absolute inset-0 z-10 ">
+        <Profile />
+      </div>
     </main>
   )
 }
@@ -262,6 +288,9 @@ export default function Home() {
 ```tsx
 import type { Metadata } from 'next'
 import { ThemeProvider } from './context/ThemeContext'
+import { GeistSans } from 'geist/font/sans';
+import { GeistMono } from 'geist/font/mono';
+import './globals.css';
 
 export const metadata: Metadata = {
   title: 'ASCII Background App',
@@ -274,7 +303,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={GeistMono.className}>
       <body>
         <ThemeProvider>
           {children}
@@ -288,69 +317,186 @@ export default function RootLayout({
 # app\globals.css
 
 ```css
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Base Styles */
+* {
+  margin: 0; /* Reset margin for all elements */
+  padding: 0; /* Reset padding for all elements */
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
 
-html, body {
+body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  height: 100vh;
-  width: 100vw;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
+  line-height: 1.6;
+  padding: 0; /* Removed padding to allow background to take full screen */
+  font-size: 1rem; /* Set base font size */
+  text-transform: lowercase;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
-#__next {
-  height: 100vh;
-  width: 100vw;
+/* Set all headings and paragraphs to have the same font size */
+h1, h2, h3, h4, h5, h6, p {
+  font-size: 1rem; /* Set to 1.2rem */
+  font-weight: normal; /* Optional: adjust weight if needed */
+  margin: .5rem; /* Optional: reset margin */
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  outline: none;
+}
+
+/* Container */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem; /* Added padding for consistent text indentation */
+  margin-left: 1rem;
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+
+.profile-container {
+  padding-left: 4rem;
+  padding-top: 3rem;
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+
+/* Header Styles */
+h1 {
+  margin-bottom: .3rem;
+  line-height: 0; /* Set line-height to 0 for header element children */
+}
+
+h1,p > * {
+  line-height: 0; /* Apply line-height of 0 to all direct children of h1 */
+  padding: 0;
+}
+
+.location {
+  color: #666; /* Subtle gray to differentiate */
+  margin-bottom: 2rem;
+}
+
+/* Section Styles */
+section {
+  margin-bottom: 2rem; /* Set gap between sections to 2rem */
+  margin-left: 0;
+}
+
+section p {
+  margin-bottom: 0; /* Remove margin below paragraphs to avoid extra spacing */
+  padding: 0;
+
+}
+
+section h2 {
+  margin:0; /* Remove margin below h2 to eliminate gap with p */
+}
+
+section p {
+  margin-top: 0; /* Remove margin above p to eliminate gap with h2 */
+  padding: 0;
+  margin-left: 0;
+}
+
+header {
+  line-height: 0.5rem; /* Set line-height to 0.5rem for children spacing */
+  margin: 0;
+  margin-bottom: 4.5rem;
+}
+
+header p, h1 {
+  padding: 0;
+  margin-left: 0;
+}
+
+h2 {
+  font-weight: bold;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  line-height: 1.4; /* Increase line height for better readability */
+}
+
+p {
+  margin-bottom: 1rem; /* Add margin to paragraphs */
+  line-height: 1.6; /* Increase line height for better readability */
+}
+
+/* Remove indentation from lists */
+ul, ol {
+  padding: 0; /* Remove padding */
+  margin: 0; /* Remove margin */
+}
+
+/* Link Styles */
+.links ul {
+  list-style: none; /* Remove list style */
+  padding: 0; /* Ensure no padding for links list */
+}
+
+.links li {
+  margin: 0; /* Remove margin */
+  font-size: 1rem; /* Set to 1rem for consistency */
+  list-style: none; /* Ensure no list style */
+}
+
+.links a {
+  color: inherit; /* Remove link color styling */
+  text-decoration: none; /* Remove underline */
+  display: block; /* Keep block display */
+  margin-bottom: 0; /* Remove margin */
   
 }
 
+/* Work Experience List Item Styles */
+ul li {
+  font-size: 1rem; /* Set to 1.2rem for consistency */
+  color: #333; /* Ensure color consistency */
+  list-style: none;
+}
+
+/* Additional Styling for Minimal Look */
+.profile {
+  border: 1px solid #ddd; /* Light border around the profile for structure */
+  padding: 0; /* Remove padding in the profile */
+  background: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* Subtle shadow for depth */
+}
+
+/* Main Element Spacing */
 main {
-  height: 100vh;
-  width: 100vw;
-  overflow: hidden; 
-
+  padding: 0; /* Remove padding from main */
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+/* Style for the background ASCII art */
+.background-ascii {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+  color: #f0f0f0; /* Light gray color for the ASCII characters */
 }
+
 
 ```
 
 # app\favicon.ico
 
 This is a binary file of the type: Binary
-
-# lib\utils.ts
-
-```ts
-import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
-
-export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
-}
-
-```
 
 # .vscode\settings.json
 
@@ -495,83 +641,73 @@ import Link from 'next/link'
 
 const Profile = () => {
   return (
-    <div className="max-w-2xl w-full bg-white p-8 shadow-sm rounded-sm text-sm leading-relaxed">
-      <header className="mb-8">
-        <h1 className="text-lg font-bold">ramunas nognys</h1>
-        <p>offshore scaffolder | rigger</p>
-      </header>
+    <div className="min-h-screen flex items-center justify-center p-4">
+      <div className="w-1/2 bg-white p-8 shadow-sm rounded-sm font-mono text-sm leading-relaxed overflow-y-auto max-h-screen">
+        <header className="mb-8">
+          <h1 className="text-lg font-bold">Ramunas Nognys</h1>
+          <p>Vilnius, Lithuania</p>
+        </header>
 
-      <section className="mb-8">
-        <h2 className="font-bold mb-2">professional summary</h2>
-        <p>
-          dynamic and results-driven offshore scaffolder and rigger with over a decade of proven experience in the
-          oil & gas and renewable energy sectors. renowned for executing complex projects with precision and an
-          unwavering commitment to safety standards. demonstrated expertise in advanced scaffolding techniques,
-          project optimization, and leading high-performance teams.
-        </p>
-      </section>
+        <section className="mb-8">
+          <h2 className="font-bold mb-2">today</h2>
+          <p>
+          I am currently working as an offshore scaffolder on the Tyra Redevelopment Project, located in the North Sea off the coast of Denmark.
+          </p>
+        </section>
 
-      <section className="mb-8">
-        <h2 className="font-bold mb-2">work experience</h2>
-        <p>
-          <span className="font-semibold">altrad</span> - offshore scaffolder/rigger at tyra redevelopment project
-        </p>
-        <p>
-          <span className="font-semibold">inwatch for van der panne</span> - offshore scaffolder | foreman
-        </p>
-        <p>
-          <span className="font-semibold">trad group of companies</span> - scaffolder
-        </p>
-        <p>
-          <span className="font-semibold">oranje group</span> - leading scaffolder
-        </p>
-        <p>
-          <span className="font-semibold">utges bv</span> - scaffolder / foreman
-        </p>
-        <p>
-          <span className="font-semibold">brogan group</span> - scaffolder
-        </p>
-      </section>
+        <section className="mb-8">
+          <h2 className="font-bold mb-2">previously worked at</h2>
+          <ul>
+            <li className="mb-1"><span className="font-semibold">Altrad</span> - Offshore Scaffolder/Rigger at Tyra Redevelopment Project</li>
+            <li className="mb-2"><span className="font-semibold">Inwatch for Van der Panne</span> - Offshore Scaffolder | Foreman</li>
+            <li className="mb-2"><span className="font-semibold">Trad Group of Companies</span> - Scaffolder</li>
+            <li className="mb-2"><span className="font-semibold">Oranje Group</span> - Leading Scaffolder</li>
+            <li className="mb-2"><span className="font-semibold">UTGES BV</span> - Scaffolder / Foreman</li>
+            <li><span className="font-semibold">Brogan Group</span> - Scaffolder</li>
+          </ul>
+        </section>
 
-      <section className="mb-8">
-        <h2 className="font-bold mb-2">key skills</h2>
-        <p>
-          advanced scaffolding techniques, project management, safety compliance, team leadership, problem-solving,
-          adaptability
-        </p>
-      </section>
+        <section className="mb-8">
+          <h2 className="font-bold mb-2">Key Skills</h2>
+          <p>
+            Advanced scaffolding techniques, project management, safety compliance, team leadership, problem-solving,
+            adaptability
+          </p>
+        </section>
 
-      <section>
-        <h2 className="font-bold mb-2">contact</h2>
-        <ul>
-          <li>
-            <Link href="mailto:ramunas.nognys@example.com" className="underline">
-              email
-            </Link>
-          </li>
-          <li>
-            <Link href="https://linkedin.com/in/ramunas-nognys" className="underline">
-              linkedin
-            </Link>
-          </li>
-          <li>
-            <Link href="tel:+37065442383" className="underline">
-              phone
-            </Link>
-          </li>
-        </ul>
-      </section>
+        <section>
+          <h2 className="font-bold mb-2">Contact</h2>
+          <ul>
+            <li className="mb-2">
+              <Link href="mailto:ramunas.nognys@example.com" className="underline" aria-label="Send email to Ramunas Nognys">
+                Email Ramunas Nognys
+              </Link>
+            </li>
+            <li className="mb-2">
+              <Link href="https://linkedin.com/in/ramunas-nognys" className="underline" aria-label="Visit Ramunas Nognys' LinkedIn profile">
+                LinkedIn Profile
+              </Link>
+            </li>
+            <li>
+              <Link href="tel:+37065442383" className="underline" aria-label="Call Ramunas Nognys">
+                Call: +370 654 42383
+              </Link>
+            </li>
+          </ul>
+        </section>
+      </div>
     </div>
   )
 }
 
 export default Profile
+
 ```
 
 # app\components\Char.tsx
 
 ```tsx
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { useTheme } from '../context/ThemeContext'
 
 interface CharProps {
@@ -584,65 +720,71 @@ interface CharProps {
 
 const Char: React.FC<CharProps> = ({ char, x, y, size, id }) => {
   const { isDark } = useTheme()
-  const [isAutoHovered, setIsAutoHovered] = useState(false)
-  const [isMouseHovered, setIsMouseHovered] = useState(false)
-  const [opacity, setOpacity] = useState(0)  // Start with 0 opacity
-  
+  const [isHovered, setIsHovered] = useState(false)
+  const [opacity, setOpacity] = useState(0)
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null)
+
   const handleMouseEnter = () => {
-    setIsMouseHovered(true)
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current)
+    }
+    setIsHovered(true)
     setOpacity(1)
   }
+
   const handleMouseLeave = () => {
-    setIsMouseHovered(false)
-    setTimeout(() => setOpacity(0), 100)  // Start fading out after a short delay
+    // Keep the character visible for a short duration after mouse leaves
+    timeoutRef.current = setTimeout(() => {
+      setIsHovered(false)
+      setOpacity(1)
+    }, 500) // Adjust the duration as needed
   }
 
   const lightColor = "rgba(0, 0, 0, 0.2)"
   const darkColor = "rgba(0, 0, 0, 0.08)" 
   const lightHoverColor = "rgba(255, 0, 0, 0.8)"
-  const darkHoverColor = "rgba(127, 127, 127, 0.5"
-  const mouseHoverColor = "red"
+  const darkHoverColor = "rgba(127, 127, 127, 0.8)"
 
   useEffect(() => {
     const element = document.getElementById(id)
     if (element) {
       element.addEventListener('autohover', handleAutoHover)
       element.addEventListener('autohoverclear', handleAutoHoverClear)
-      element.addEventListener('mouseenter', handleMouseEnter)
-      element.addEventListener('mouseleave', handleMouseLeave)
     }
-    // Fade in effect
     setTimeout(() => setOpacity(1), 100)
     return () => {
       if (element) {
         element.removeEventListener('autohover', handleAutoHover)
         element.removeEventListener('autohoverclear', handleAutoHoverClear)
-        element.removeEventListener('mouseenter', handleMouseEnter)
-        element.removeEventListener('mouseleave', handleMouseLeave)
+      }
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current)
       }
     }
   }, [id])
 
   const handleAutoHover = () => {
-    if (!isMouseHovered) {
-      setIsAutoHovered(true)
+    if (!isHovered) {
+      setIsHovered(true)
       setOpacity(1)
     }
   }
 
   const handleAutoHoverClear = () => {
-    setIsAutoHovered(false)
-    setTimeout(() => setOpacity(0), 100)  // Start fading out after a short delay
+    if (!isHovered) {
+      timeoutRef.current = setTimeout(() => {
+        setIsHovered(false)
+        setOpacity(1)
+      }, 100)
+    }
   }
 
   return (
     <>
       <style jsx>{`
         .char {
-          transition: fill 0.3s ease, transform 0.5s ease, opacity 0.2s ease;  // Increased opacity transition duration
-        }
-        .char:hover {
-          transform: scale(1.2);
+            transition: fill 0.3s ease, opacity 0.2s ease;
+
         }
       `}</style>
       <text
@@ -650,16 +792,14 @@ const Char: React.FC<CharProps> = ({ char, x, y, size, id }) => {
         x={x}
         y={y}
         fontSize={size}
-        fill={isMouseHovered 
-          ? mouseHoverColor
-          : (isAutoHovered 
-            ? (isDark ? darkHoverColor : lightHoverColor)
-            : (isDark ? darkColor : lightColor)
-          )
+        fill={isHovered 
+          ? (isDark ? darkHoverColor : lightHoverColor)
+          : (isDark ? darkColor : lightColor)
         }
-        fontFamily="monospace"
         className="char"
         opacity={opacity}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
       >
         {char}
       </text>
