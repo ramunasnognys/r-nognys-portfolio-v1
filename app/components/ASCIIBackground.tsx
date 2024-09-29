@@ -95,13 +95,13 @@ const ASCIIBackground: React.FC = () => {
   }, [chars])
 
   return (
-    <div className={`fixed inset-0 overflow-hidden ${isDark ? 'bg-black' : 'bg-white'}`}>
+    <div className={`fixed inset-0 overflow-hidden ${isDark ? 'bg-black' : 'bg-white'} pointer-events-none`} style={{ zIndex: -1 }}>
       <svg
         ref={svgRef}
         width="100%"
         height="100%"
         className="absolute top-0 left-0"
-        style={{ minHeight: '100vh', minWidth: '100vw', position: 'fixed', cursor: 'default' }}
+        style={{ minHeight: '100vh', minWidth: '100vw', position: 'fixed' }}
       >
         {chars}
       </svg>

@@ -16,6 +16,7 @@ body {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  text-align: left; /* Align text to the left */
 }
 
 /* Set all headings and paragraphs to have the same font size */
@@ -24,10 +25,13 @@ h1, h2, h3, h4, h5, h6, p {
   font-weight: normal; /* Optional: adjust weight if needed */
   margin: .5rem; /* Optional: reset margin */
   padding: 0;
+  max-width: 70ch; /* Set max width to 70 characters */
+  text-align: left; /* Align text to the left */
+  line-height: 1.5; /* Adjust line height for better spacing */
 }
 
 a {
-  text-decoration: none;
+  text-decoration: underline; /* Added underline to all links */
   color: inherit;
   outline: none;
 }
@@ -45,6 +49,7 @@ a {
 }
 
 .profile-container {
+  max-width: 70ch; /* Set max width to 70 characters */
   padding-left: 4rem;
   padding-top: 3rem;
   -webkit-user-select: text;
@@ -57,6 +62,7 @@ a {
 h1 {
   margin-bottom: .3rem;
   line-height: 0; /* Set line-height to 0 for header element children */
+  margin-bottom: 1rem; /* Added margin for spacing between h1 and span */
 }
 
 h1,p > * {
@@ -82,6 +88,7 @@ section p {
 }
 
 section h2 {
+  font-weight: normal; /* Changed from bold to normal */
   margin:0; /* Remove margin below h2 to eliminate gap with p */
 }
 
@@ -103,7 +110,7 @@ header p, h1 {
 }
 
 h2 {
-  font-weight: bold;
+  font-weight: normal; /* Changed from bold to normal */
   margin-top: 2rem;
   margin-bottom: 1rem;
   line-height: 1.4; /* Increase line height for better readability */
@@ -172,3 +179,10 @@ main {
   color: #f0f0f0; /* Light gray color for the ASCII characters */
 }
 
+/* Add this to your globals.css */
+.selectable {
+  -webkit-user-select: text; /* Allow text selection */
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
