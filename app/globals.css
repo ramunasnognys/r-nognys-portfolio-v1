@@ -148,6 +148,10 @@ ul, ol {
   
 }
 
+ul {
+  display: block;
+}
+
 /* Work Experience List Item Styles */
 ul li {
   font-size: 1rem; /* Set to 1.2rem for consistency */
@@ -196,5 +200,128 @@ main {
 ::selection {
   background-color: #000000; /* Background color for selected text */
   color: white; /* Text color for selected text */
+}
+
+
+/* Fade-In Animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 1.5s ease-out forwards;
+  opacity: 0;
+}
+
+
+/* Top-Down Fade-In Animation */
+@keyframes fadeInTopDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-top-down {
+  opacity: 0;
+  animation: fadeInTopDown 1s ease forwards;
+  animation-play-state: paused;
+  animation-delay: inherit;
+}
+
+/* This will trigger the animation after the page loads */
+body:not(.loading) .fade-in-top-down {
+  animation-play-state: running;
+}
+
+
+/* Links List Styles */
+.links-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+
+
+.links-list a {
+  display: inline-block; /* Allows the underline to only span the text */
+  text-decoration: underline;
+  color: inherit;
+}
+
+/* ... rest of the styles ... */
+
+
+
+/* Style for the background ASCII art */
+
+
+
+/* Highlight Text Style */
+.highlight {
+  background-color: black;
+  color: white;
+  padding: 0.2rem;
+  border-radius: 0;
+  display: inline-block;
+  line-height: 1;
+}
+
+.highlight * {
+  color: white !important;
+}
+
+
+/* Style for selected text */
+::selection {
+  background-color: #000000; /* Background color for selected text */
+  color: white; /* Text color for selected text */
+}
+
+
+/* Fade-In Animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 1.5s ease-out forwards;
+  opacity: 0;
+}
+
+
+/* Top-Down Fade-In Animation */
+@keyframes fadeInTopDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-top-down {
+  animation: fadeInTopDown 1s ease forwards;
 }
 

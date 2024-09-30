@@ -2,7 +2,11 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 # Ramas Cook's Portfolio v3
+=======
+# Ramas Cook's Portfolio v2
+>>>>>>> Stashed changes
 =======
 # Ramas Cook's Portfolio v2
 >>>>>>> Stashed changes

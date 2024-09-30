@@ -1,25 +1,48 @@
 import Link from 'next/link'
 import React from 'react'; // Add this import
+import { ReactNode } from 'react';
+
+interface AnimatedElementProps {
+  children: ReactNode;
+  tag?: keyof JSX.IntrinsicElements;
+  className?: string;
+  index: number;
+}
 
 const Profile = () => {
+  const baseDelay = 0.5; // 0.5 second base delay
+  const animationDelayStep = 0.2; // 0.1 second step between elements
+
+  const AnimatedElement = ({ children, tag = 'div', className = '', index }: AnimatedElementProps) => {
+    const Tag = tag;
+    return (
+      <Tag 
+        className={`fade-in-top-down ${className}`} 
+        style={{ animationDelay: `${baseDelay + index * animationDelayStep}s` }}
+      >
+        {children}
+      </Tag>
+    );
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center p-4">
       <div className="w-1/2 bg-white p-8 shadow-sm rounded-sm font-mono text-sm leading-relaxed overflow-y-auto max-h-screen">
-        <header className="mb-8 flex items-center">
+        <AnimatedElement tag="header" className="mb-8 flex items-center" index={0}>
           <h1 className="text-lg font-bold mr-2">Ramunas Nognys</h1>
           <span className="leading-loose">Vilnius, lt</span> {/* Added line height */}
-        </header>
+        </AnimatedElement>
 
-        <section className="mb-8">
+        <AnimatedElement tag="section" className="mb-8" index={1}>
           <h2 className="font-bold mb-2">
             <strong>today</strong> {/* Made bold */}
           </h2>
           <p>
             I am currently working as an offshore scaffolder at <Link href="https://uk.altradservices.com/" className="underline">altrad</Link>, on the Tyra Redevelopment Project, located in the North Sea off the coast of Denmark.
           </p>
-        </section>
+        </AnimatedElement>
 
-        <section className="mb-8">
+        <AnimatedElement tag="section" className="mb-8" index={2}>
           <h2 className="font-bold mb-2">
             previously worked at {/* Made bold */}
             <span className="font-semibold">
@@ -31,9 +54,9 @@ const Profile = () => {
               <Link href="https://www.brogangroup.com/" className="underline">brogan group</Link>
             </span>
           </h2>
-        </section>
+        </AnimatedElement>
 
-        <section className="mb-8">
+        <AnimatedElement tag="section" className="mb-8" index={3}>
           <h2 className="font-bold mb-2">
             <strong>Key Skills</strong> {/* Made bold */}
           </h2>
@@ -41,19 +64,19 @@ const Profile = () => {
             Advanced scaffolding techniques, project management, safety compliance, team leadership, problem-solving,
             adaptability
           </p>
-        </section>
+        </AnimatedElement>
 
-        <section>
+        <AnimatedElement tag="section" index={4}>
           <h2 className="font-bold mb-2">
             <strong>links</strong> {/* Made bold */}
           </h2>
-          <ul>
+          <ul className="links-list">
             <li>
               <Link href="https://x.com/RamunasNognys" className="underline" aria-label="visit Ramunas Nognys' X profile">
                 twitter/x
               </Link>
             </li>
-            <li className="mb-2">
+            <li>
               <Link href="https://linkedin.com/in/ramunas-nognys" className="underline" aria-label="Visit Ramunas Nognys' LinkedIn profile">
                 linkedin
               </Link>
@@ -63,14 +86,13 @@ const Profile = () => {
                 github
               </Link>
             </li>
-            <li className="mb-2">
+            <li>
               <Link href="mailto:ramunas.nognys@example.com" className="underline" aria-label="Send email to Ramunas Nognys">
                 email
               </Link>
             </li>
-
           </ul>
-        </section>
+        </AnimatedElement>
       </div>
     </div>
   )
