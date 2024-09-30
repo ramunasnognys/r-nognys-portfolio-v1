@@ -7,7 +7,7 @@ const Profile = () => {
       <div className="w-1/2 bg-white p-8 shadow-sm rounded-sm font-mono text-sm leading-relaxed overflow-y-auto max-h-screen">
         <header className="mb-8 flex items-center">
           <h1 className="text-lg font-bold mr-2">Ramunas Nognys</h1>
-          <span className="leading-loose">Vilnius, Lithuania</span> {/* Added line height */}
+          <span className="leading-loose">Vilnius, lt</span> {/* Added line height */}
         </header>
 
         <section className="mb-8">
@@ -15,7 +15,7 @@ const Profile = () => {
             <strong>today</strong> {/* Made bold */}
           </h2>
           <p>
-            I am currently working as an offshore scaffolder at Altrad on the Tyra Redevelopment Project, located in the North Sea off the coast of Denmark.
+            I am currently working as an offshore scaffolder at <Link href="https://uk.altradservices.com/" className="underline">altrad</Link>, on the Tyra Redevelopment Project, located in the North Sea off the coast of Denmark.
           </p>
         </section>
 
@@ -23,12 +23,12 @@ const Profile = () => {
           <h2 className="font-bold mb-2">
             previously worked at {/* Made bold */}
             <span className="font-semibold">
-              <Link href="https://example.com/altrad" className="underline">altrad</Link>,&nbsp; 
-              <Link href="https://example.com/van-der-panne" className="underline">van der panne</Link>,&nbsp; 
-              <Link href="https://example.com/oranje-group" className="underline">oranje group</Link>,&nbsp; 
-              <Link href="https://example.com/trad-scaffolding" className="underline">trad scaffolding</Link>&nbsp; 
+              <Link href="https://uk.altradservices.com/" className="underline">altrad</Link>,&nbsp; 
+              <Link href="https://panne.nl/en/" className="underline">van der panne</Link>,&nbsp; 
+              <Link href="https://www.oranjegroep.com/" className="underline">oranje group</Link>,&nbsp; 
+              <Link href="https://www.tradscaffolding.com/" className="underline">trad scaffolding</Link>&nbsp; 
               and&nbsp; 
-              <Link href="https://example.com/brogan-group" className="underline">brogan group</Link>
+              <Link href="https://www.brogangroup.com/" className="underline">brogan group</Link>
             </span>
           </h2>
         </section>
@@ -48,9 +48,9 @@ const Profile = () => {
             <strong>links</strong> {/* Made bold */}
           </h2>
           <ul>
-            <li className="mb-2">
-              <Link href="mailto:ramunas.nognys@example.com" className="underline" aria-label="Send email to Ramunas Nognys">
-                email
+            <li>
+              <Link href="https://x.com/RamunasNognys" className="underline" aria-label="visit Ramunas Nognys' X profile">
+                twitter/x
               </Link>
             </li>
             <li className="mb-2">
@@ -58,17 +58,17 @@ const Profile = () => {
                 linkedin
               </Link>
             </li>
-
             <li>
               <Link href="https://github.com/ramunasnognys" className="underline" aria-label="visit Ramunas Nognys' github profile">
                 github
               </Link>
             </li>
-            <li>
-              <Link href="https://x.com/RamunasNognys" className="underline" aria-label="visit Ramunas Nognys' X profile">
-                x
+            <li className="mb-2">
+              <Link href="mailto:ramunas.nognys@example.com" className="underline" aria-label="Send email to Ramunas Nognys">
+                email
               </Link>
             </li>
+
           </ul>
         </section>
       </div>

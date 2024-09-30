@@ -12,7 +12,6 @@ export default function Home() {
     <main className="relative h-screen w-screen ">
       <div className="profile-container absolute">
         <Profile />
-        {/* <ASCIIBackground /> */}
       </div>
     </main>
   )
