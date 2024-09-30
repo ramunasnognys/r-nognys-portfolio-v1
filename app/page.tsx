@@ -9,10 +9,10 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <main className="relative h-screen w-screen overflow-hidden">
-      <ASCIIBackground />
-      <div className="profile-container absolute inset-0 z-10 ">
+    <main className="relative h-screen w-screen ">
+      <div className="profile-container absolute">
         <Profile />
+        {/* <ASCIIBackground /> */}
       </div>
     </main>
   )

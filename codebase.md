@@ -63,7 +63,11 @@ export default config;
 ```md
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+<<<<<<< Updated upstream
 # Ramas Cook's Portfolio v3
+=======
+# Ramas Cook's Portfolio v2
+>>>>>>> Stashed changes
 ## Getting Started
 First, run the development server:
 
@@ -261,7 +265,6 @@ export function cn(...inputs: ClassValue[]) {
 # app\page.tsx
 
 ```tsx
-import ASCIIBackground from './components/ASCIIBackground'
 import Profile from './components/profile'
 import { Metadata } from 'next'
 
@@ -273,9 +276,8 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <main className="relative h-screen w-screen overflow-hidden">
-      <ASCIIBackground />
-      <div className="profile-container absolute inset-0 z-10 ">
-        <Profile />
+      <div className="profile-container absolute inset-0 z-10 pointer-events-auto">
+        {/* <Profile /> */}
       </div>
     </main>
   )
@@ -288,9 +290,14 @@ export default function Home() {
 ```tsx
 import type { Metadata } from 'next'
 import { ThemeProvider } from './context/ThemeContext'
+import ASCIIBackground from './components/ASCIIBackground'
+import Profile from './components/profile'
+
+
 import { GeistSans } from 'geist/font/sans';
 import { GeistMono } from 'geist/font/mono';
 import './globals.css';
+
 
 export const metadata: Metadata = {
   title: 'ASCII Background App',
@@ -306,6 +313,8 @@ export default function RootLayout({
     <html lang="en" className={GeistMono.className}>
       <body>
         <ThemeProvider>
+        <Profile />
+        <ASCIIBackground />
           {children}
         </ThemeProvider>
       </body>
@@ -326,15 +335,16 @@ export default function RootLayout({
 
 body {
   color: var(--foreground);
-  background: var(--background);
+  background: var(--background); /* Ensure this is set correctly */
   line-height: 1.6;
   padding: 0; /* Removed padding to allow background to take full screen */
   font-size: 1rem; /* Set base font size */
   text-transform: lowercase;
-  -webkit-user-select: none;
+  /* -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
-  user-select: none;
+  user-select: none; */
+  text-align: left; /* Align text to the left */
 }
 
 /* Set all headings and paragraphs to have the same font size */
@@ -343,10 +353,13 @@ h1, h2, h3, h4, h5, h6, p {
   font-weight: normal; /* Optional: adjust weight if needed */
   margin: .5rem; /* Optional: reset margin */
   padding: 0;
+  max-width: 70ch; /* Set max width to 70 characters */
+  text-align: left; /* Align text to the left */
+  line-height: 1.5; /* Adjust line height for better spacing */
 }
 
 a {
-  text-decoration: none;
+  text-decoration: underline; /* Added underline to all links */
   color: inherit;
   outline: none;
 }
@@ -361,21 +374,27 @@ a {
   -moz-user-select: text;
   -ms-user-select: text;
   user-select: text;
+  background: var(--background); /* Add this line */
 }
 
 .profile-container {
+  max-width: 70ch; /* Set max width to 70 characters */
   padding-left: 4rem;
   padding-top: 3rem;
   -webkit-user-select: text;
   -moz-user-select: text;
   -ms-user-select: text;
   user-select: text;
+  background: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+  background-color: transparent;
+
 }
 
 /* Header Styles */
 h1 {
   margin-bottom: .3rem;
   line-height: 0; /* Set line-height to 0 for header element children */
+  margin-bottom: 1rem; /* Added margin for spacing between h1 and span */
 }
 
 h1,p > * {
@@ -386,6 +405,7 @@ h1,p > * {
 .location {
   color: #666; /* Subtle gray to differentiate */
   margin-bottom: 2rem;
+  
 }
 
 /* Section Styles */
@@ -401,6 +421,7 @@ section p {
 }
 
 section h2 {
+  font-weight: normal; /* Changed from bold to normal */
   margin:0; /* Remove margin below h2 to eliminate gap with p */
 }
 
@@ -422,7 +443,7 @@ header p, h1 {
 }
 
 h2 {
-  font-weight: bold;
+  font-weight: normal; /* Changed from bold to normal */
   margin-top: 2rem;
   margin-bottom: 1rem;
   line-height: 1.4; /* Increase line height for better readability */
@@ -468,15 +489,18 @@ ul li {
 
 /* Additional Styling for Minimal Look */
 .profile {
-  border: 1px solid #ddd; /* Light border around the profile for structure */
   padding: 0; /* Remove padding in the profile */
   background: #fff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* Subtle shadow for depth */
+  
 }
 
 /* Main Element Spacing */
 main {
   padding: 0; /* Remove padding from main */
+  background: transparent;
+  position: relative;
+  z-index: 1;
 }
 
 /* Style for the background ASCII art */
@@ -491,7 +515,27 @@ main {
   color: #f0f0f0; /* Light gray color for the ASCII characters */
 }
 
+/* Add this to your globals.css */
+.selectable {
+  
+  -webkit-user-select: text; /* Allow text selection */
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
 
+/* In your global CSS file */
+::selection {
+  
+  background-color: red;
+  color: blue;
+}
+
+.text-content {
+  background-color: rgba(255, 255, 255, 0.7);
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+}
 ```
 
 # app\favicon.ico
@@ -638,37 +682,44 @@ export default ToggleButton
 
 ```tsx
 import Link from 'next/link'
+import React from 'react'; // Add this import
 
 const Profile = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center p-4">
-      <div className="w-1/2 bg-white p-8 shadow-sm rounded-sm font-mono text-sm leading-relaxed overflow-y-auto max-h-screen">
-        <header className="mb-8">
-          <h1 className="text-lg font-bold">Ramunas Nognys</h1>
-          <p>Vilnius, Lithuania</p>
+    <div className="profile-container min-h-screen flex items-center justify-center p-4 z-10">
+      <div className="w-1/2 bg-transparent p-8 font-mono text-sm leading-relaxed overflow-y-auto max-h-screen">
+        <header className="mb-8 flex items-center">
+          <h1 className="text-lg font-bold mr-2">Ramunas Nognys</h1>
+          <span className="leading-loose">Vilnius, Lithuania</span> {/* Added line height */}
         </header>
 
         <section className="mb-8">
-          <h2 className="font-bold mb-2">today</h2>
+          <h2 className="font-bold mb-2">
+            <strong>today</strong> {/* Made bold */}
+          </h2>
           <p>
-          I am currently working as an offshore scaffolder on the Tyra Redevelopment Project, located in the North Sea off the coast of Denmark.
+            I am currently working as an offshore scaffolder at Altrad on the Tyra Redevelopment Project, located in the North Sea off the coast of Denmark.
           </p>
         </section>
 
         <section className="mb-8">
-          <h2 className="font-bold mb-2">previously worked at</h2>
-          <ul>
-            <li className="mb-1"><span className="font-semibold">Altrad</span> - Offshore Scaffolder/Rigger at Tyra Redevelopment Project</li>
-            <li className="mb-2"><span className="font-semibold">Inwatch for Van der Panne</span> - Offshore Scaffolder | Foreman</li>
-            <li className="mb-2"><span className="font-semibold">Trad Group of Companies</span> - Scaffolder</li>
-            <li className="mb-2"><span className="font-semibold">Oranje Group</span> - Leading Scaffolder</li>
-            <li className="mb-2"><span className="font-semibold">UTGES BV</span> - Scaffolder / Foreman</li>
-            <li><span className="font-semibold">Brogan Group</span> - Scaffolder</li>
-          </ul>
+          <h2 className="font-bold mb-2">
+            previously worked at {/* Made bold */}
+            <span className="font-semibold">
+              <Link href="https://example.com/altrad" className="underline selectable">altrad</Link>,&nbsp; 
+              <Link href="https://example.com/van-der-panne" className="underline selectable">van der panne</Link>,&nbsp; 
+              <Link href="https://example.com/oranje-group" className="underline selectable">oranje group</Link>,&nbsp; 
+              <Link href="https://example.com/trad-scaffolding" className="underline selectable">trad scaffolding</Link>&nbsp; 
+              and&nbsp; 
+              <Link href="https://example.com/brogan-group" className="underline selectable">brogan group</Link>
+            </span>
+          </h2>
         </section>
 
         <section className="mb-8">
-          <h2 className="font-bold mb-2">Key Skills</h2>
+          <h2 className="font-bold mb-2">
+            <strong>Key Skills</strong> {/* Made bold */}
+          </h2>
           <p>
             Advanced scaffolding techniques, project management, safety compliance, team leadership, problem-solving,
             adaptability
@@ -676,21 +727,29 @@ const Profile = () => {
         </section>
 
         <section>
-          <h2 className="font-bold mb-2">Contact</h2>
+          <h2 className="font-bold mb-2">
+            <strong>links</strong> {/* Made bold */}
+          </h2>
           <ul>
             <li className="mb-2">
-              <Link href="mailto:ramunas.nognys@example.com" className="underline" aria-label="Send email to Ramunas Nognys">
-                Email Ramunas Nognys
+              <Link href="mailto:ramunas.nognys@example.com" className="underline selectable" aria-label="Send email to Ramunas Nognys">
+                email
               </Link>
             </li>
             <li className="mb-2">
-              <Link href="https://linkedin.com/in/ramunas-nognys" className="underline" aria-label="Visit Ramunas Nognys' LinkedIn profile">
-                LinkedIn Profile
+              <Link href="https://linkedin.com/in/ramunas-nognys" className="underline selectable" aria-label="Visit Ramunas Nognys' LinkedIn profile">
+                linkedin
+              </Link>
+            </li>
+
+            <li>
+              <Link href="https://github.com/ramunasnognys" className="underline selectable" aria-label="visit Ramunas Nognys' github profile">
+                github
               </Link>
             </li>
             <li>
-              <Link href="tel:+37065442383" className="underline" aria-label="Call Ramunas Nognys">
-                Call: +370 654 42383
+              <Link href="https://x.com/RamunasNognys" className="underline selectable" aria-label="visit Ramunas Nognys' X profile">
+                x
               </Link>
             </li>
           </ul>
@@ -843,18 +902,17 @@ const ASCIIBackground: React.FC = () => {
   useEffect(() => {
     const generateChars = () => {
       const newChars: React.ReactNode[] = []
-      const gridSize = 20 // Grid size
+      const gridSize = 20
       const cols = Math.ceil(dimensions.width / gridSize)
       const rows = Math.ceil(dimensions.height / gridSize)
 
       for (let row = 0; row < rows; row++) {
         for (let col = 0; col < cols; col++) {
-          // Introduce randomness in character placement
-          if (Math.random() > 0.3) { // 70% chance of placing a character
+          if (Math.random() > 0.3) {
             const char = ASCII_CHARS[Math.floor(Math.random() * ASCII_CHARS.length)]
             const x = col * gridSize
             const y = row * gridSize
-            const size = Math.random() * 3 + 14 // Smaller size range
+            const size = Math.random() * 3 + 14
             const id = `char-${row}-${col}`
 
             newChars.push(
@@ -891,7 +949,7 @@ const ASCIIBackground: React.FC = () => {
 
       const charElements = document.querySelectorAll('[id^="char-"]')
       const charCount = charElements.length
-      const hoverCount = Math.min(20, charCount) // Increased number of hovered chars
+      const hoverCount = Math.min(20, charCount)
 
       for (let i = 0; i < hoverCount; i++) {
         const randomIndex = Math.floor(Math.random() * charCount)
@@ -903,14 +961,13 @@ const ASCIIBackground: React.FC = () => {
       }
     }
 
-    // In the ASCIIBackground component, update the interval:
-  const intervalId = setInterval(autoHover, 800) // Increased to 300ms for more noticeable transitions
+    const intervalId = setInterval(autoHover, 800)
 
     return () => clearInterval(intervalId)
   }, [chars])
 
   return (
-    <div className={`fixed inset-0 overflow-hidden ${isDark ? 'bg-black' : 'bg-white'}`}>
+    <div className={`fixed inset-0 overflow-hidden ${isDark ? 'bg-black' : 'bg-white'} pointer-events-none z-0`}>
       <svg
         ref={svgRef}
         width="100%"

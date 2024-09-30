@@ -7,7 +7,6 @@
 
 body {
   color: var(--foreground);
-  background: var(--background);
   line-height: 1.6;
   padding: 0; /* Removed padding to allow background to take full screen */
   font-size: 1rem; /* Set base font size */
@@ -56,6 +55,7 @@ a {
   -moz-user-select: text;
   -ms-user-select: text;
   user-select: text;
+  position: relative;
 }
 
 /* Header Styles */
@@ -160,29 +160,18 @@ ul li {
   padding: 0; /* Remove padding in the profile */
   background: #fff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* Subtle shadow for depth */
+  background: red;
 }
 
 /* Main Element Spacing */
 main {
   padding: 0; /* Remove padding from main */
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  
 }
 
 /* Style for the background ASCII art */
-.background-ascii {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  pointer-events: none;
-  color: #f0f0f0; /* Light gray color for the ASCII characters */
-}
 
-/* Add this to your globals.css */
-.selectable {
-  -webkit-user-select: text; /* Allow text selection */
-  -moz-user-select: text;
-  -ms-user-select: text;
-  user-select: text;
-}
+

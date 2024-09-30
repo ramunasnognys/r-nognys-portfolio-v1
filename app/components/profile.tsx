@@ -3,7 +3,7 @@ import React from 'react'; // Add this import
 
 const Profile = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 selectable">
+    <div className="min-h-screen flex items-center justify-center p-4">
       <div className="w-1/2 bg-white p-8 shadow-sm rounded-sm font-mono text-sm leading-relaxed overflow-y-auto max-h-screen">
         <header className="mb-8 flex items-center">
           <h1 className="text-lg font-bold mr-2">Ramunas Nognys</h1>
