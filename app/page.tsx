@@ -1,17 +1,20 @@
-import ASCIIBackground from './components/ASCIIBackground'
 import Profile from './components/profile'
-import { Metadata } from 'next'
-
-export const metadata: Metadata = {
-  title: 'Ramunas Nognys - Offshore Scaffolder and Rigger',
-  description: 'Ramunas Nognys - Experienced offshore scaffolder and rigger with a decade of experience in the oil & gas and renewable energy sectors.',
-}
+import ASCIIBackground from './components/ASCIIBackground'
+import AudioPlayer from './components/AudioPlayer'
 
 export default function Home() {
   return (
-    <main className="relative h-screen w-screen ">
-      <div className="profile-container absolute">
-        <Profile />
+    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+      <div className="audio-player-container">
+        <AudioPlayer />
+      </div>
+      <div className="relative w-full max-w-2xl">
+        <div className="profile-container">
+          <div className="flex-layout">
+            <Profile />
+            <ASCIIBackground />
+          </div>
+        </div>
       </div>
     </main>
   )

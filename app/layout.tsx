@@ -1,9 +1,6 @@
 import type { Metadata } from 'next'
 import { ThemeProvider } from './context/ThemeContext'
-import ASCIIBackground from './components/ASCIIBackground'
 
-
-// import { GeistSans } from 'geist/font/sans';
 import { GeistMono } from 'geist/font/mono';
 import './globals.css';
 
@@ -19,9 +16,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={GeistMono.className}>
-      <body>
+      <body className="selectable">
         <ThemeProvider>
-          <ASCIIBackground />
           {children}
         </ThemeProvider>
       </body>

@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useRef } from 'react'
-import { useTheme } from '../context/ThemeContext'
 
 interface CharProps {
   char: string
@@ -10,7 +9,6 @@ interface CharProps {
 }
 
 const Char: React.FC<CharProps> = ({ char, x, y, size, id }) => {
-  const { isDark } = useTheme()
   const [isHovered, setIsHovered] = useState(false)
   const [opacity, setOpacity] = useState(0)
   const timeoutRef = useRef<NodeJS.Timeout | null>(null)
@@ -31,10 +29,8 @@ const Char: React.FC<CharProps> = ({ char, x, y, size, id }) => {
     }, 500) // Adjust the duration as needed
   }
 
-  const lightColor = "rgba(0, 0, 0, 0.2)"
-  const darkColor = "rgba(0, 0, 0, 0.08)" 
-  const lightHoverColor = "rgba(255, 0, 0, 0.8)"
-  const darkHoverColor = "rgba(127, 127, 127, 0.8)"
+  const defaultColor = "rgba(0, 0, 0, 0.1)" // Adjust as needed
+  const hoverColor = "rgba(127, 127, 127, 0.8)" // Adjust as needed
 
   useEffect(() => {
     const element = document.getElementById(id)
@@ -75,7 +71,6 @@ const Char: React.FC<CharProps> = ({ char, x, y, size, id }) => {
       <style jsx>{`
         .char {
             transition: fill 0.3s ease, opacity 0.2s ease;
-
         }
       `}</style>
       <text
@@ -83,10 +78,7 @@ const Char: React.FC<CharProps> = ({ char, x, y, size, id }) => {
         x={x}
         y={y}
         fontSize={size}
-        fill={isHovered 
-          ? (isDark ? darkHoverColor : lightHoverColor)
-          : (isDark ? darkColor : lightColor)
-        }
+        fill={isHovered ? hoverColor : defaultColor}
         className="char"
         opacity={opacity}
         onMouseEnter={handleMouseEnter}

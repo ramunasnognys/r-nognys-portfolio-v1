@@ -1,5 +1,7 @@
+'use client'
+
 import Link from 'next/link'
-import React from 'react'; // Add this import
+import React from 'react';
 import { ReactNode } from 'react';
 
 interface AnimatedElementProps {
@@ -26,11 +28,14 @@ const Profile = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4">
-      <div className="w-1/2 bg-white p-8 shadow-sm rounded-sm font-mono text-sm leading-relaxed overflow-y-auto max-h-screen">
-        <AnimatedElement tag="header" className="mb-8 flex items-center" index={0}>
-          <h1 className="text-lg font-bold mr-2">Ramunas Nognys</h1>
-          <span className="leading-loose">Vilnius, lt</span> {/* Added line height */}
+    <div className="min-h-screen flex items-center justify-center p-4 selectable text-selectable profile-overlay">
+      <div className="w-1/2 bg-white bg-opacity-90 p-8 shadow-sm rounded-sm font-mono text-sm leading-relaxed overflow-y-auto max-h-screen">
+        <AnimatedElement tag="header" className="mb-8 flex flex-col" index={0}>
+          <div className="flex justify-between items-center w-full">
+            <h1 className="text-lg">Ramunas Nognys</h1>
+            {/* <AudioPlayer /> */}
+          </div>
+          <span className="leading-loose">Vilnius, lt</span>
         </AnimatedElement>
 
         <AnimatedElement tag="section" className="mb-8" index={1}>
@@ -61,8 +66,7 @@ const Profile = () => {
             <strong>Key Skills</strong> {/* Made bold */}
           </h2>
           <p>
-            Advanced scaffolding techniques, project management, safety compliance, team leadership, problem-solving,
-            adaptability
+          I build the scaffolds by day, the apps by night. Armed with v0.dev, Claude AI, Cursor Editor, Next.js, Tailwind, and ShadCN — crafting the future, one line at a time.
           </p>
         </AnimatedElement>
 
