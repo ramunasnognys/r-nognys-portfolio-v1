@@ -28,8 +28,8 @@ const AudioPlayer: React.FC = () => {
       onClick={togglePlayPause}
       className="bg-black text-white p-2 rounded-full z-50 text-xs"
     >
-      {isPlaying ? <PauseOutlined /> : <CaretRightOutlined />}
-    </button>
+      {isPlaying ? <PauseOutlined style={{ color: 'whte' }} /> : <CaretRightOutlined style={{ color: 'black' }} />}
+      </button>
   );
 };
 

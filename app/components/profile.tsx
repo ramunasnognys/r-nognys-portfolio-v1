@@ -43,7 +43,7 @@ const Profile = () => {
             <strong>today</strong> {/* Made bold */}
           </h2>
           <p>
-            I am currently working as an offshore scaffolder at <Link href="https://uk.altradservices.com/" className="underline">altrad</Link>, on the Tyra Redevelopment Project, located in the North Sea off the coast of Denmark.
+            I am working as an offshore scaffolder at <Link href="https://uk.altradservices.com/" className="underline">altrad</Link>, on the Tyra Redevelopment Project, located in the North Sea coast of Denmark.
           </p>
         </AnimatedElement>
 
@@ -66,7 +66,7 @@ const Profile = () => {
             <strong>Key Skills</strong> {/* Made bold */}
           </h2>
           <p>
-          I build the scaffolds by day, the apps by night. Armed with v0.dev, Claude AI, Cursor Editor, Next.js, Tailwind, and ShadCN — crafting the future, one line at a time.
+          Scaffolding in the daylight, app building in the moonlight.
           </p>
         </AnimatedElement>
 

@@ -420,11 +420,11 @@ button:hover svg {
 }
 
 .selectable {
-  cursor: none;
+  cursor: default; /* Change this from 'none' to 'default' */
 }
 
 .selectable:hover {
-  cursor: none;
+  cursor: default; /* Change this from 'none' to 'default' */
 }
 
 .no-select {
@@ -455,6 +455,7 @@ button:hover svg {
   position: relative;
   z-index: 10;
   pointer-events: auto;
+  cursor: default; /* Change this from 'none' to 'default' */
 }
 
 .profile-overlay > div {

@@ -29,8 +29,8 @@ const Char: React.FC<CharProps> = ({ char, x, y, size, id }) => {
     }, 500) // Adjust the duration as needed
   }
 
-  const defaultColor = "rgba(0, 0, 0, 0.1)" // Adjust as needed
-  const hoverColor = "rgba(127, 127, 127, 0.8)" // Adjust as needed
+  const defaultColor = "rgba(0, 0, 0, 0.07)" // Adjust as needed
+  const hoverColor = "rgba(127, 127, 127, 0.5)" // Adjust as needed
 
   useEffect(() => {
     const element = document.getElementById(id)
