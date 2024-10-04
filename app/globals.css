@@ -63,17 +63,14 @@ a {
   .profile-container {
     padding-left: 1rem; /* Adjust padding for mobile devices */
   }
-
-  .audio-player-container{
-    right: 1rem; /* Adjust right position for mobile devices */
-  }
+  
 }
 
 .flex-layout {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
+  width: 100%; 
   
 }
 
@@ -81,7 +78,7 @@ a {
   font-size: 1.5rem;
   font-weight: bold;
   margin: 0;
-  padding: 0;
+  padding: 0; 
   
 }
 
@@ -95,7 +92,7 @@ header > div {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
+  width: 100%; 
   
 }
 
@@ -206,7 +203,7 @@ main {
   padding: 0; 
   background: transparent;
   padding: 0;
-  margin: 0;
+  margin: 0; 
   
 }
 
@@ -281,11 +278,13 @@ body:not(.loading) .fade-in-top-down {
 
 
 
+
 .links-list a {
   display: inline-block; 
   text-decoration: underline;
   color: inherit;
 }
+
 
 
 
@@ -363,7 +362,7 @@ body:not(.loading) .fade-in-top-down {
 .audio-player-container {
   position: absolute;
   top: 2.7rem;
-  right: 2rem;
+  right: 4rem;
   z-index: 10;
   align-items: top;
 }
@@ -460,4 +459,33 @@ button:hover svg {
 
 .profile-overlay > div {
   background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Always show cursor */
+* {
+  cursor: none !important;
+}
+
+/* Custom cursor styles */
+.custom-cursor {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #000;
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transition: all 0.1s ease;
+}
+
+.custom-cursor::after {
+  content: '';
+  width: 4px;
+  height: 4px;
+  background-color: #000;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
